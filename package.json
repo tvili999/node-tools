@@ -7,10 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watch --silent=false"
   },
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-ws": "^4.0.0"
-  },
   "devDependencies": {
     "jest": "^27.0.3",
     "js-container": "https://github.com/tvili999/js-container"
