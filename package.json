@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch --silent=false"
   },
   "dependencies": {
     "express": "^4.17.1",
