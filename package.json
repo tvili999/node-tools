@@ -10,5 +10,8 @@
   "devDependencies": {
     "jest": "^27.0.3",
     "js-container": "https://github.com/tvili999/js-container"
+  },
+  "dependencies": {
+    "js-utils": "https://github.com/tvili999/js-utils"
   }
 }

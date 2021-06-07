@@ -1,4 +1,4 @@
-const arrayMap = require("./arrayMap");
+const arrayMap = require("js-utils/arrayMap");
 
 const createStash = () => {
     const queryMakers = {};
