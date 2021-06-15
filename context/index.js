@@ -12,7 +12,7 @@ const createContext = () => {
                 if(!contextBuilders[name])
                     throw "No such builder";
 
-                cache[name] = contextBuilders[name](req);
+                cache[name] = contextBuilders[name](req, res);
 
                 return cache[name];
             }
