@@ -2,7 +2,10 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
     .inject(componentName, () => {
         const _handlers = {};
 
+        let ran = false;
+
         const api = async () => {
+            ran = true;
             let configs = [];
             for(const stage of stages) {
                 if(_handlers[stage])
@@ -19,6 +22,9 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
 
         for(const stage of stages) {
             api[stage] = (handler) => {
+                if(ran) {
+                    throw `Handler of stage ${stage} is added after running them in component ${componentName}`;
+                }
                 if(!_handlers[stage])
                     _handlers[stage] = [];
                 _handlers[stage].push(handler);
@@ -29,7 +35,7 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
 
         return api;
     })
-    .run(async ({ get }) => {
+    .run("componentName", async ({ get }) => {
         const app = await get(componentName);
         await app();
     })
