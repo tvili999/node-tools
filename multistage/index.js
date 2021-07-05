@@ -12,7 +12,7 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
                     configs = [...configs, ..._handlers[stage]];
             }
 
-            const app = await Promise.resolve(init());
+            const app = await Promise.resolve(init(container));
 
             for(const config of configs)
                 await Promise.resolve(config(app));
@@ -35,7 +35,7 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
 
         return api;
     })
-    .run("componentName", async ({ get }) => {
+    .run(componentName, async ({ get }) => {
         const app = await get(componentName);
         await app();
     })
