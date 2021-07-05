@@ -17,7 +17,7 @@ module.exports = (componentName, { init, run, stages }) => container => (contain
             for(const config of configs)
                 await Promise.resolve(config(app));
 
-            await Promise.resolve(run(app));
+            await Promise.resolve(run(container));
         };
 
         for(const stage of stages) {
