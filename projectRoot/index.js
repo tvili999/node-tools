@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = (currentFile) => {
-    let currentPath = path.dirname(currentFile);
+    const dirname = path.dirname(currentFile);
+    let currentPath = dirname;
 
     while(!fs.existsSync(path.resolve(currentPath, "package.json"))) {
         const parentDir = path.resolve(currentPath, "..");
@@ -13,5 +14,5 @@ module.exports = (currentFile) => {
         currentPath = parentDir;
     }
 
-    return currentPath;
+    return path.relative(dirname, path.join(currentPath, "package.json"));
 }
