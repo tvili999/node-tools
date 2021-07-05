@@ -14,5 +14,5 @@ module.exports = (currentFile) => {
         currentPath = parentDir;
     }
 
-    return path.relative(dirname, path.join(currentPath, "package.json"));
+    return path.relative(dirname, currentPath);
 }
