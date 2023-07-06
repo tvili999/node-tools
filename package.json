@@ -1,17 +1,17 @@
 {
-  "name": "node-tools",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch --silent=false"
-  },
-  "devDependencies": {
-    "jest": "^27.0.3",
-    "js-container": "https://github.com/tvili999/js-container"
-  },
-  "dependencies": {
-    "js-utils": "https://github.com/tvili999/js-utils"
-  }
+    "name": "@tvili999/node-tools",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch --silent=false"
+    },
+    "devDependencies": {
+        "jest": "^27.0.3",
+        "@tvili999/js-container": "1.0.0"
+    },
+    "dependencies": {
+        "@tvili999/js-utils": "1.0.0"
+    }
 }
