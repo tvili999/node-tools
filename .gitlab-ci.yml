@@ -19,4 +19,6 @@ publish:
    - arm64
   script:
     - auth-npm-registry $NEXUS_NPM_TOKEN
+    - pnpm install
+    - pnpm build
     - pnpm publish --no-git-checks

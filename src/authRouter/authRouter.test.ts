@@ -1,12 +1,8 @@
-const createAuthRouter = require("./index");
+import createAuthRouter from "./authRouter";
 
-test('passes', () => {
-    expect(true).toBe(true);
-});
-
-test('calls handler, does not call next', async () => {
+test("calls handler, does not call next", async () => {
     const authRouter = createAuthRouter({
-        auth: async () => true
+        auth: async () => true,
     });
 
     const handler = jest.fn(() => {});
@@ -18,9 +14,9 @@ test('calls handler, does not call next', async () => {
     expect(next.mock.calls.length).toBe(0);
 });
 
-test('calls next, does not call handler', async () => {
+test("calls next, does not call handler", async () => {
     const authRouter = createAuthRouter({
-        auth: async () => false
+        auth: async () => false,
     });
 
     const handler = jest.fn(() => {});
