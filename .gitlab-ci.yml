@@ -6,9 +6,8 @@ test:
   stage: test
   image: docker.tvili999.xyz/node-ci-image:latest
   tags:
-   - arm64
+    - arm64
   script:
-    - auth-npm-registry $NEXUS_NPM_TOKEN
     - pnpm install
     - pnpm test
 
@@ -16,7 +15,7 @@ publish:
   stage: publish
   image: docker.tvili999.xyz/node-ci-image:latest
   tags:
-   - arm64
+    - arm64
   script:
     - auth-npm-registry $NEXUS_NPM_TOKEN
     - pnpm install
