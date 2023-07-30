@@ -6,23 +6,18 @@
     "package.json"
   ],
   "license": "MIT",
-  "type": "module",
   "exports": {
-    "./context": "./lib/context/index.js",
-    "./query": "./lib/query/index.js",
-    "./events": "./lib/events/index.js"
-  },
-  "typesVersions": {
-    "*": {
-      "context": [
-        "./lib/context/index.d.ts"
-      ],
-      "query": [
-        "./lib/query/index.d.ts"
-      ],
-      "events": [
-        "./lib/events/index.d.ts"
-      ]
+    "./context": {
+      "types": "./lib/context/index.d.ts",
+      "require": "./lib/context/index.js"
+    },
+    "./query": {
+      "types": "./lib/query/index.d.ts",
+      "require": "./lib/query/index.js"
+    },
+    "./events": {
+      "types": "./lib/events/index.d.ts",
+      "require": "./lib/events/index.js"
     }
   },
   "scripts": {
