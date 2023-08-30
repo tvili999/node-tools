@@ -1,9 +1,4 @@
-import ContextFactory from "./contextFactory.js"
-import { Context, EntryBuilder } from "./types.js"
+import ContextFactory from "./contextFactory.js";
+import { Context, EntryBuilder, EntryKey } from "./types.js";
 
-export {
-    ContextFactory,
-
-    Context,
-    EntryBuilder
-}
+export { ContextFactory, EntryKey, Context, EntryBuilder };

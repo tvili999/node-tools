@@ -1,6 +1,6 @@
 {
   "name": "@tvili999/node-tools",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "files": [
     "lib",
     "package.json"
