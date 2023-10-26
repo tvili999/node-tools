@@ -1,59 +1,59 @@
 # Context
 
-Context is a middleware for express that enables lightweight contexts to be created lazily on request object.
+This is a context object implementation. You can add items to this context, and get them later.
+
+This way you can pass around the context in your application. It was created for request scoped objects. You can pass this context around instead of individual request scoped objects like db connection or authentication data.
 
 ## Usage
 
-```js
-const createContext = require("node-tools/context");
+First you need a context factory:
 
-// Setting up context
-const context = createContext();
-app.use(context);
+```ts
+import { ContextFactory } from "@tvili999/node-tools/context";
 
-// Setting up context builder
-context.add("testContext", (req) => {
-    let _value = 0;
-    return {
-        set: (value) => _value = value,
-        get: () => _value
-    }
-});
-
-app.get("/", (req, res) => {
-    // req.context.testContext gets builded here
-    req.context.testContext.set(25);
-
-    // req.context.testContext already exists here, as well the value is 25
-    res.send(req.context.testContext.get()); 
-});
+const contextFactory = new ContextFactory();
 ```
 
-### Practical example
+Then you can add builders to this factory:
 
-```js
-const createContext = require("node-tools/context");
-const resolveOnce = require("node-tools/resolveOnce");
+```ts
+contextFactory.addBuilder("me", async (req, res) => {
+    const userId = decodeToken(req.headers['authorization'])
 
-const context = createContext();
-app.use(context);
+    return await db.get(userId)
+})
+```
 
-context.add("getMe", (req) => resolveOnce(() => 
-    db.queryUser(req.cookies.username)
-));
+And now you can use it in your request, and pass it around:
 
-context.add("getMyCart", (req) => resolveOnce(async () => 
-    db.queryCartByUserID((await req.context.getMe()).id)
-));
+```ts
+app.get("/api/me", async (req, res) => {
+    const context = await contextFactory.build(req, res);
 
-app.get("/", (req, res) => {
-    const me = await req.context.getMe(); // Me gets queried from DB here
+    const me = await context.get("me") as User;
+})
+```
 
 
-    res.send(await req.context.getCart()); // Cart gets queried from DB here, but me is already queried
-});
+## EntryKey
 
-app.get("/cart-only", (req, res) => {
-    res.send(await req.context.getCart()); // Me and cart gets queried from DB here
-});
+If you use typescript, you can avoid casting by using `EntryKey`s:
+
+```ts
+import { EntryKey } from "@tvili999/node-tools/context";
+
+const meKey: EntryKey<User> = Symbol("me");
+
+contextFactory.addBuilder(meKey, async (req, res) => {
+    const userId = decodeToken(req.headers['authorization'])
+
+    return await db.get(userId) // It is enforced to return User
+})
+
+app.get("/api/me", async (req, res) => {
+    const context = await contextFactory.build(req, res);
+
+    const me = await context.get(meKey)
+    // me will be type of User, as it is infered from `meKey`
+})
 ```
